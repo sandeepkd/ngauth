@@ -1,0 +1,51 @@
+<main role="main">
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing top-100">
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="featurette-heading text-center">Register <span class="text-muted"> It'll blow your mind.</span></h2>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-6 offset-md-3">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="was-validated">
+            <div class="form-group">
+              <label for="fullname">Full Name:</label>
+              <input type="text" class="form-control" id="fullname" formControlName="fullname" placeholder="Full Name"
+                name="fullname" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email"
+                name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="uname">Username:</label>
+              <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username"
+                name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="text" class="form-control" id="password" formControlName="password" placeholder="Password"
+                name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="cpassword">Confirm Password:</label>
+              <input type="password" class="form-control" id="cpassword" formControlName="cpassword"
+                placeholder="Confirm Password" name="cpassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+</main>
+<hr class="featurette-divider">

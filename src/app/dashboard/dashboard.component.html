@@ -1,3 +1,31 @@
-<p>
-  dashboard works!
-</p>
+<main role="main" class="main">
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing"> 
+    <!-- START THE FEATURETTES -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="featurette-heading text-center">Dashboard <span class="text-muted"> Hi, {{username}}</span></h2>
+        <hr class="featurette-divider">
+        <p style="text-align: center;">{{message}}</p>
+      </div>
+      <div class="col-md-12">
+          <div class="col-md-6 offset-md-3">
+            <table class="table table-striped">
+              <tr>
+                <td>Name: </td><td>{{name}}</td>
+              </tr>
+              <tr>
+                <td>Email: </td><td>{{email}}</td>
+              </tr>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!-- /END THE FEATURETTES -->
+  </div><!-- /.container -->
+</main>
+
+<hr class="featurette-divider">

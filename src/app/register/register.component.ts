@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../_services/register.service';
-import { User } from '../_services/user';
 
 @Component({
   selector: 'app-register',
@@ -10,39 +9,30 @@ import { User } from '../_services/user';
 })
 export class RegisterComponent implements OnInit {
 
-  fullImagePath: String;
-  angularImagePath: String;
-  nodejsImagePath: String;
-  jwtImagePath: String;
-
-  constructor(private registerService: RegisterService) { 
-    this.fullImagePath = 'assets/images/banner.jpg';
-    this.angularImagePath = 'assets/images/angular.jpg';
-    this.nodejsImagePath = 'assets/images/nodejs.jpg';
-    this.jwtImagePath = 'assets/images/jwt.jpg';
-  }
-
-  ngOnInit() {
-    
-  }
-
+  constructor(private registerService: RegisterService) { }
+  errorMsg='';
+  ngOnInit() { }
 
   registerForm = new FormGroup({
-        fullname:   new FormControl(''),
-        username :  new FormControl(''),
-        email:      new FormControl(''),
-        password :  new FormControl(''),
-        cpassword:  new FormControl('')
+        fullname:   new FormControl('',[Validators.required]),
+        username :  new FormControl('',[Validators.required]),
+        email:      new FormControl('',[Validators.required, Validators.email]),
+        password :  new FormControl('',[Validators.required]),
+        cpassword:  new FormControl('',[Validators.required])
   });
 
   onSubmit(){
 
-    this.registerService.register(this.registerForm.value).subscribe((res) => {
+    if(this.registerForm.value.password === this.registerForm.value.cpassword){
 
-      console.log(res);
+      this.registerService.registerDataPost(this.registerForm.value).subscribe((res) => {
+        console.log(this.registerForm.value);
+      });
 
-    });
+    }else{
 
+      var errorMsg:string ="Password and confirm passwords are not matching.";
+      
+    }
   }
-
 }

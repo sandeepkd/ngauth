@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../../_services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  loggedIn:boolean = false;
+  subscription: Subscription;
+  
+  constructor(private loginService: LoginService) { 
 
-  ngOnInit() {
+    this.subscription = this.loginService.getMessage().subscribe(message => {
+      if (message.text=='success') {
+        this.loggedIn=true;
+      } else {
+        // clear messages when empty message received
+        this.loggedIn=false;
+      }
+    });
+
   }
+
+  ngOnInit() {}
 
 }

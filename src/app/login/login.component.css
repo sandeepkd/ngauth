@@ -1,5 +1,10 @@
-.top-100{
+.main{ 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    }
 
-    margin-top: 220px;
-
+input.ng-invalid.ng-touched{
+    border: 1px solid #e74c3c !important; 
 }

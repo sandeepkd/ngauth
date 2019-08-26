@@ -1,37 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from '../_services/login.service';
+import * as jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login', 
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
- 
-  fullImagePath: String;
-  angularImagePath: String;
-  nodejsImagePath: String;
-  jwtImagePath: String;
 
-  constructor() { 
-    this.fullImagePath = 'assets/images/banner.jpg';
-    this.angularImagePath = 'assets/images/angular.jpg';
-    this.nodejsImagePath = 'assets/images/nodejs.jpg';
-    this.jwtImagePath = 'assets/images/jwt.jpg';
-  }
+  username:string = "";
+  password:string = "";
+  errorMessage:string = "";
+
+  constructor(private loginService: LoginService, public router: Router) { }
   
   ngOnInit() {
   }
 
   loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('',[Validators.required, Validators.minLength(4)]),
+    password: new FormControl('',[Validators.required, Validators.minLength(4)])
   });
 
   onSubmit(){
 
-    console.log('It Works');
-    console.warn(this.loginForm.value);
+     let loggedIn = false;
+     // Call login service
+     this.loginService.loginDataPost(this.loginForm.value).subscribe((data)=>{
+         let userData = jwt_decode(data);
+         // If successfuly loggedin then it will redirect to dashboard
+         if(userData.auth){
+          let sessionData = "data";
+          localStorage.setItem(sessionData, JSON.stringify(userData));
+          loggedIn = true;
+          this.router.navigate(['/dashboard'])
+         }else{
+          this.errorMessage = userData.message;
+         } 
+         
+     });
 
   }
 

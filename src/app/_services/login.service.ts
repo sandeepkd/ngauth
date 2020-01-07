@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../_models/User';
-
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class LoginService {
 
   loginDataPost(UserData: any){
     
-    return this.httpClient.post<User[]>(`${this.apiURL}`+'/login/', UserData);
+    return this.httpClient.post<any>(`${this.apiURL}`+'/login/', UserData);
     
   }
 
@@ -28,6 +26,7 @@ export class LoginService {
     }else{
       return false;
     }
+
   }
 
   private subject = new Subject<any>();
